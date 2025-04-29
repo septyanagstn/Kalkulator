@@ -1,6 +1,6 @@
 package kalkulatorapp;
 
-public class Calculator {
+public class Kalkulator {
 
     public static int tambah(int a, int b) {
         return a + b;
@@ -15,6 +15,9 @@ public class Calculator {
     }
 
     public static int bagi(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Tidak boleh membagi dengan nol.");
+        }
         return a / b;
     }
 }

@@ -19,9 +19,9 @@ public class MainApp {
         String operator = scanner.nextLine();
 
         try {
-            int hasil = Computation.hitung(inputA, inputB, operator);
+            int hasil = Komputasi.hitung(inputA, inputB, operator);
             System.out.println("Hasil: " + hasil);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ArithmeticException e) {
             System.out.println(e.getMessage());
         }
 
