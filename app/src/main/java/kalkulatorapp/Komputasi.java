@@ -93,7 +93,7 @@ public class Komputasi {
             case "/":
                 return Kalkulator.bagi(a, b);
             default:
-                throw new IllegalArgumentException("Error: Operator tidak dikenali.");
+                throw new IllegalArgumentException("Error: Operator hanya boleh +, -, *, atau /.");
         }
     }
 }
