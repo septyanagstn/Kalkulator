@@ -69,12 +69,13 @@ public class Komputasi {
 
     // Fungsi untuk melakukan operasi hitung
     public static int hitung(String inputA, String inputB, String operator) throws IllegalArgumentException {
-        int a = parseAngka(inputA); // pakai parseAngka (bukan validasiAngka)
-        int b = parseAngka(inputB);
+        int a = validasiAngka(inputA);
+        int b = validasiAngka(inputB);
 
         validasiRangeAngka(a);
         validasiRangeAngka(b);
         validasiOperator(operator);
+        validasiPembagian(operator, b);
 
         switch (operator) {
             case "+":
