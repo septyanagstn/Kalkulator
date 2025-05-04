@@ -67,10 +67,16 @@ public class Komputasi {
         return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/");
     }
 
+    private static void validasiPembagian(String operator, int b) {
+        if (operator.equals("/") && b == 0) {
+            throw new IllegalArgumentException("Error: Tidak bisa membagi dengan nol.");
+        }
+    }
+
     // Fungsi untuk melakukan operasi hitung
     public static int hitung(String inputA, String inputB, String operator) throws IllegalArgumentException {
-        int a = validasiAngka(inputA);
-        int b = validasiAngka(inputB);
+        int a = parseAngka(inputA);
+        int b = parseAngka(inputB);
 
         validasiRangeAngka(a);
         validasiRangeAngka(b);

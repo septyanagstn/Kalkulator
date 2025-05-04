@@ -40,7 +40,7 @@ public class KomputasiTest {
         Komputasi.hitung("2", "3", "%");
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPembagiNol() {
         Komputasi.hitung("2", "0", "/");
     }
