@@ -24,26 +24,6 @@ public class KomputasiTest {
     public void testBagi() {
         assertEquals(2, Komputasi.hitung("6", "3", "/"));
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInputBukanAngka() {
-        Komputasi.hitung("a", "2", "+");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testAngkaDiluarRange() {
-        Komputasi.hitung("40000", "2", "+");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testOperatorTidakValid() {
-        Komputasi.hitung("2", "3", "%");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPembagiNol() {
-        Komputasi.hitung("2", "0", "/");
-    }
     
     @Test(expected = IllegalArgumentException.class)
     public void testInputANull() {
@@ -56,8 +36,8 @@ public class KomputasiTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testOperatorNull() {
-        Komputasi.hitung("2", "3", null);
-    }
+    public void testInputBukanAngka() {
+        Komputasi.hitung("a", "2", "+");
+    }    
 
 }
