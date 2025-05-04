@@ -3,12 +3,13 @@ package kalkulatorapp;
 public class Komputasi {
 
     public static int hitung(String inputA, String inputB, String operator) throws IllegalArgumentException {
-        int a = parseAngka(inputA); // pakai parseAngka (bukan validasiAngka)
-        int b = parseAngka(inputB);
+        int a = validasiAngka(inputA);
+        int b = validasiAngka(inputB);
 
         validasiRangeAngka(a);
         validasiRangeAngka(b);
         validasiOperator(operator);
+        validasiPembagian(operator, b);
 
         switch (operator) {
             case "+":
@@ -24,18 +25,10 @@ public class Komputasi {
         }
     }
 
-    // Fungsi baru: cek apakah input valid (dipakai di MainApp)
-    public static boolean validasiAngka(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    private static int validasiAngka(String input) {
+        if (input == null) {
+            throw new IllegalArgumentException("Error: Input angka tidak boleh null.");
         }
-    }
-
-    // Fungsi baru: mengubah input ke int (dipakai di hitung)
-    public static int parseAngka(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -43,13 +36,24 @@ public class Komputasi {
         }
     }
 
-    public static void validasiRangeAngka(int number) {
+    private static void validasiRangeAngka(int number) {
         if (number < -32768 || number > 32767) {
             throw new IllegalArgumentException("Error: Angka harus berada di antara -32,768 hingga 32,767.");
         }
     }
 
-    public static boolean validasiOperator(String operator) {
-        return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/");
+    private static void validasiOperator(String operator) {
+        if (operator == null) {
+            throw new IllegalArgumentException("Error: Operator tidak boleh null.");
+        }
+        if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
+            throw new IllegalArgumentException("Error: Operator hanya boleh +, -, *, atau /.");
+        }
+    }
+
+    private static void validasiPembagian(String operator, int b) {
+        if (operator.equals("/") && b == 0) {
+            throw new IllegalArgumentException("Error: Tidak bisa membagi dengan nol.");
+        }
     }
 }
