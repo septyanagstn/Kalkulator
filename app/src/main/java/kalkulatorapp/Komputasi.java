@@ -3,8 +3,8 @@ package kalkulatorapp;
 public class Komputasi {
 
     public static int hitung(String inputA, String inputB, String operator) throws IllegalArgumentException {
-        int a = validasiAngka(inputA);
-        int b = validasiAngka(inputB);
+        int a = parseAngka(inputA); // pakai parseAngka (bukan validasiAngka)
+        int b = parseAngka(inputB);
 
         validasiRangeAngka(a);
         validasiRangeAngka(b);
@@ -24,7 +24,18 @@ public class Komputasi {
         }
     }
 
-    private static int validasiAngka(String input) {
+    // Fungsi baru: cek apakah input valid (dipakai di MainApp)
+    public static boolean validasiAngka(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    // Fungsi baru: mengubah input ke int (dipakai di hitung)
+    public static int parseAngka(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -32,15 +43,13 @@ public class Komputasi {
         }
     }
 
-    private static void validasiRangeAngka(int number) {
+    public static void validasiRangeAngka(int number) {
         if (number < -32768 || number > 32767) {
             throw new IllegalArgumentException("Error: Angka harus berada di antara -32,768 hingga 32,767.");
         }
     }
 
-    private static void validasiOperator(String operator) {
-        if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
-            throw new IllegalArgumentException("Error: Operator hanya boleh +, -, *, atau /.");
-        }
+    public static boolean validasiOperator(String operator) {
+        return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/");
     }
 }
