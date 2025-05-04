@@ -10,48 +10,34 @@ public class MainApp {
         while (true) {
             System.out.println("=== Kalkulator Sederhana ===");
 
-            System.out.print("Masukkan angka pertama (atau ketik 'exit' untuk keluar): ");
-            String inputA = scanner.nextLine();
-            if (inputA.equalsIgnoreCase("exit")) {
-                break;  // Keluar dari perulangan jika pengguna mengetik 'exit'
+            // INPUT A
+            int a = Komputasi.inputAngka(scanner, "Masukkan angka pertama (atau ketik 'exit' untuk keluar): ");
+            if (a == Integer.MIN_VALUE) {
+                System.out.println("Terima kasih telah menggunakan Kalkulator Sederhana.");
+                scanner.close();
+                return;
             }
 
-            // Memastikan inputA valid angka
-            while (!Komputasi.validasiAngka(inputA)) {
-                System.out.println("Error: Input harus berupa angka.");
-                System.out.print("Masukkan angka pertama: ");
-                inputA = scanner.nextLine();
+            // INPUT B
+            int b = Komputasi.inputAngka(scanner, "Masukkan angka kedua: ");
+            if (b == Integer.MIN_VALUE) {
+                System.out.println("Terima kasih telah menggunakan Kalkulator Sederhana.");
+                scanner.close();
+                return;
             }
 
-            System.out.print("Masukkan angka kedua: ");
-            String inputB = scanner.nextLine();
+            // OPERATOR
+            String operator = Komputasi.inputOperator(scanner);
 
-            // Memastikan inputB valid angka
-            while (!Komputasi.validasiAngka(inputB)) {
-                System.out.println("Error: Input harus berupa angka.");
-                System.out.print("Masukkan angka kedua: ");
-                inputB = scanner.nextLine();
-            }
-
-            System.out.print("Masukkan operator (+, -, *, /): ");
-            String operator = scanner.nextLine();
-
-            // Memastikan operator valid
-            while (!Komputasi.validasiOperator(operator)) {
-                System.out.println("Error: Operator hanya boleh +, -, *, atau /.");
-                System.out.print("Masukkan operator (+, -, *, /): ");
-                operator = scanner.nextLine();
-            }
-
+            // HASIL
             try {
-                int hasil = Komputasi.hitung(inputA, inputB, operator);
+                int hasil = Komputasi.hitung(String.valueOf(a), String.valueOf(b), operator);
                 System.out.println("Hasil: " + hasil);
-            } catch (IllegalArgumentException | ArithmeticException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }
 
-        scanner.close();  // Menutup scanner setelah keluar dari perulangan
-        System.out.println("Terima kasih telah menggunakan Kalkulator Sederhana.");
+            System.out.println();
+        }
     }
 }
