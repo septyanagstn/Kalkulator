@@ -20,7 +20,7 @@ public class Komputasi {
             int angka = parseAngka(input);
             try {
                 validasiRangeAngka(angka);
-                return angka;  // Return angka yang valid
+                return angka;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

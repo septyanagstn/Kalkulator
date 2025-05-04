@@ -7,7 +7,8 @@ public class MainApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Kalkulator Sederhana ===");
+        while (true) {
+            System.out.println("=== Kalkulator Sederhana ===");
 
             // INPUT A
             int a = Komputasi.inputAngka(scanner, "Masukkan angka pertama (atau ketik 'exit' untuk keluar): ");
@@ -37,5 +38,6 @@ public class MainApp {
             }
 
             System.out.println();
+        }
     }
 }
