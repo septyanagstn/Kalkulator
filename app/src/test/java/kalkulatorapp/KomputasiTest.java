@@ -40,4 +40,8 @@ public class KomputasiTest {
         Komputasi.hitung("a", "2", "+");
     }    
 
+    @Test(expected = ArithmeticException.class)
+    public void testPembagiNol() {
+        Komputasi.hitung("2", "0", "/");
+    }
 }

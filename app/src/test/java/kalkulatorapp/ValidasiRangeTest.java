@@ -1,28 +1,28 @@
 package kalkulatorapp;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class ValidasiRangeTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testAngkaDiatasRange() {
-        Komputasi.hitung("40000", "2", "+");
-    }
-
-        @Test(expected = IllegalArgumentException.class)
-    public void testAngkaDibawahRange() {
-        Komputasi.hitung("-40000", "2", "+");
+    @Test
+    public void testInputKurangDariMin() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> {
+            Komputasi.validasiRangeAngka(-32769);
+        });
+        assertTrue(e.getMessage().contains("Error: Angka harus berada di antara -32,768 hingga 32,767."));
     }
 
     @Test
-    public void testAngkaRangeBawah() {
-        assertEquals(-32766, Komputasi.hitung("-32768", "2", "+"));
+    public void testInputLebihDariMax() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> {
+            Komputasi.validasiRangeAngka(32768);
+        });
+        assertTrue(e.getMessage().contains("Error: Angka harus berada di antara -32,768 hingga 32,767."));
     }
 
     @Test
-    public void testAngkaRangeAtas() {
-        assertEquals(32767, Komputasi.hitung("32766", "1", "+"));
+    public void testInputDalamRange() {
+        Komputasi.validasiRangeAngka(-32767); // Tidak melempar exception
     }
 }

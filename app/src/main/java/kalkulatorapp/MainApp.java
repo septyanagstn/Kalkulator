@@ -7,24 +7,37 @@ public class MainApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== Kalkulator Sederhana ===");
+        while (true) {
+            System.out.println("=== Kalkulator Sederhana ===");
 
-        System.out.print("Masukkan angka pertama: ");
-        String inputA = scanner.nextLine();
+            // INPUT A
+            int a = Komputasi.inputAngka(scanner, "Masukkan angka pertama (atau ketik 'exit' untuk keluar): ");
+            if (a == Integer.MIN_VALUE) {
+                System.out.println("Terima kasih telah menggunakan Kalkulator Sederhana.");
+                scanner.close();
+                return;
+            }
 
-        System.out.print("Masukkan angka kedua: ");
-        String inputB = scanner.nextLine();
+            // INPUT B
+            int b = Komputasi.inputAngka(scanner, "Masukkan angka kedua: ");
+            if (b == Integer.MIN_VALUE) {
+                System.out.println("Terima kasih telah menggunakan Kalkulator Sederhana.");
+                scanner.close();
+                return;
+            }
 
-        System.out.print("Masukkan operator (+, -, *, /): ");
-        String operator = scanner.nextLine();
+            // OPERATOR
+            String operator = Komputasi.inputOperator(scanner);
 
-        try {
-            int hasil = Komputasi.hitung(inputA, inputB, operator);
-            System.out.println("Hasil: " + hasil);
-        } catch (IllegalArgumentException | ArithmeticException e) {
-            System.out.println(e.getMessage());
+            // HASIL
+            try {
+                int hasil = Komputasi.hitung(String.valueOf(a), String.valueOf(b), operator);
+                System.out.println("Hasil: " + hasil);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            System.out.println();
         }
-
-        scanner.close();
     }
 }
